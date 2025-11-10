@@ -57,18 +57,18 @@ public class GameSession {
         return TAKE_CARD_PLAYER_MESSAGE;
     }
 
-    public String handleStart(){
+    public String handleStart() {
         return WELCOME_MESSAGE + READ_RULES_MESSAGE + START_MESSAGE;
     }
 
-    public String handleRules(){
+    public String handleRules() {
         if (gameOver) {
             return GAME_RULES + "\n" + START_MESSAGE;
         }
         return GAME_RULES + "\n" + TAKE_CARD_PLAYER_MESSAGE;
     }
 
-    public String handleDefault(){
+    public String handleDefault() {
         if (gameOver) {
             return GAME_RULES + "\n" + START_MESSAGE;
         }
@@ -79,9 +79,9 @@ public class GameSession {
         playerCurrentCard = deck.getFirst();
         takeCardFromDeck(deck, playerHand);
         playerScore += playerCurrentCard.rank();
-        if (playerCurrentCard.face().equals("A")){
+        if (playerCurrentCard.face().equals("A")) {
             hasPlayerAce = true;
-            if (playerScore + 10 == WIN_SCORE){
+            if (playerScore + 10 == WIN_SCORE) {
                 playerScore += 10;
                 return buildGameStateMessage();
             }
@@ -120,9 +120,9 @@ public class GameSession {
             takeCardFromDeck(deck, dealerHand);
             dealerScore += dealerCurrentCard.rank();
             dealerLastCards.add(dealerCurrentCard);
-            if (dealerCurrentCard.face().equals("A")){
+            if (dealerCurrentCard.face().equals("A")) {
                 hasDealerAce = true;
-                if (dealerScore + 10 == WIN_SCORE){
+                if (dealerScore + 10 == WIN_SCORE) {
                     dealerScore += 10;
                     hasDealerStopped = true;
                     return;
@@ -139,7 +139,7 @@ public class GameSession {
         }
     }
 
-    private String buildGameStateMessage(){
+    private String buildGameStateMessage() {
         StringBuilder answer = new StringBuilder();
         if (isGameOverCheck()) {
             answer.append(PLAYERS_HAND)
@@ -155,8 +155,6 @@ public class GameSession {
                     .append(GAME_OVER);
         } else if (hasPlayerStopped) {
             answer.append("\n").append(END_PLAYERS_TURN_MESSAGE);
-        } else if (hasDealerStopped) {
-            answer.append("\n").append(END_DEALERS_TURN_MESSAGE);
         }
         if (!hasPlayerStopped && !isGameOverCheck()) {
             answer.append(PLAYERS_CARD)
@@ -166,16 +164,20 @@ public class GameSession {
                     .append(Card.printDeck(playerHand, 1))
                     .append(PLAYERS_SCORE)
                     .append(hasPlayerAce && playerScore + 10 < WIN_SCORE ? playerScore + 10 : playerScore)
-                    .append(".\n")
-                    .append(TAKE_CARD_DEALER_MESSAGE)
-                    .append(dealerLastCards.size())
-                    .append(dealerLastCards.size() == 1 ? " card" : " cards" )
-                    .append(". ")
-                    .append(NUMBER_OF_CARDS_DEALER_MESSAGE)
-                    .append(dealerHand.size())
-                    .append(dealerHand.size() == 1 ? " card" : " cards" )
-                    .append(".\n")
-                    .append(TAKE_CARD_PLAYER_MESSAGE);
+                    .append(".\n");
+            if (hasDealerStopped) {
+                answer.append(END_DEALERS_TURN_MESSAGE);
+            } else {
+                answer.append(TAKE_CARD_DEALER_MESSAGE)
+                        .append(dealerLastCards.size())
+                        .append(dealerLastCards.size() == 1 ? " card" : " cards")
+                        .append(". ")
+                        .append(NUMBER_OF_CARDS_DEALER_MESSAGE)
+                        .append(dealerHand.size())
+                        .append(dealerHand.size() == 1 ? " card" : " cards")
+                        .append(".\n");
+            }
+            answer.append(TAKE_CARD_PLAYER_MESSAGE);
         }
         return answer.toString();
     }

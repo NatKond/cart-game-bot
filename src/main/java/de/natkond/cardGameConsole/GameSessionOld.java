@@ -140,7 +140,7 @@ public class GameSessionOld {
         }
     }
 
-    private String buildGameStateMessage(){
+    private String buildGameStateMessage() {
         StringBuilder answer = new StringBuilder();
         if (isGameOverCheck()) {
             answer.append(PLAYERS_HAND)
@@ -156,8 +156,6 @@ public class GameSessionOld {
                     .append(GAME_OVER);
         } else if (hasPlayerStopped) {
             answer.append("\n").append(END_PLAYERS_TURN_MESSAGE);
-        } else if (hasDealerStopped) {
-            answer.append("\n").append(END_DEALERS_TURN_MESSAGE);
         }
         if (!hasPlayerStopped && !isGameOverCheck()) {
             answer.append(PLAYERS_CARD)
@@ -167,16 +165,20 @@ public class GameSessionOld {
                     .append(Card.printDeck(playerHand, 1))
                     .append(PLAYERS_SCORE)
                     .append(hasPlayerAce && playerScore + 10 < WIN_SCORE ? playerScore + 10 : playerScore)
-                    .append(".\n")
-                    .append(TAKE_CARD_DEALER_MESSAGE)
-                    .append(dealerLastCards.size())
-                    .append(dealerLastCards.size() == 1 ? " card" : " cards" )
-                    .append(". ")
-                    .append(NUMBER_OF_CARDS_DEALER_MESSAGE)
-                    .append(dealerHand.size())
-                    .append(dealerHand.size() == 1 ? " card" : " cards" )
-                    .append(".\n")
-                    .append(TAKE_CARD_PLAYER_MESSAGE);
+                    .append(".\n");
+            if (hasDealerStopped) {
+                answer.append(END_DEALERS_TURN_MESSAGE);
+            } else {
+                answer.append(TAKE_CARD_DEALER_MESSAGE)
+                        .append(dealerLastCards.size())
+                        .append(dealerLastCards.size() == 1 ? " card" : " cards")
+                        .append(". ")
+                        .append(NUMBER_OF_CARDS_DEALER_MESSAGE)
+                        .append(dealerHand.size())
+                        .append(dealerHand.size() == 1 ? " card" : " cards")
+                        .append(".\n");
+            }
+            answer.append(TAKE_CARD_PLAYER_MESSAGE);
         }
         return answer.toString();
     }
