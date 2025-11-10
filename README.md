@@ -11,6 +11,7 @@ The goal is to beat the dealer by getting closer to 21 without going over.
 - **Maven**
 
 ## 🚀 How to Start
+To run locally use the command from the directory with the docker-compose.yml file.
 ```shell
 docker-compose up --build
 ```
