@@ -2,6 +2,8 @@ package de.natkond.util;
 
 import java.util.*;
 
+import static de.natkond.util.GameConstants.*;
+
 public record Card(Suit suit, String face, int rank) {
 
     public enum Suit {
@@ -50,6 +52,7 @@ public record Card(Suit suit, String face, int rank) {
             }
         }
         Collections.shuffle(standardDeck);
+        Collections.rotate(standardDeck, standardDeck.size() / 2);
         return standardDeck;
     }
 
@@ -57,7 +60,7 @@ public record Card(Suit suit, String face, int rank) {
         List<Card> standardDeck = new ArrayList<>(52);
         String face = "JQKA";
         for (Suit suit : Suit.values()) {
-            for (int i = 2; i <= 10; i++) {
+            for (int i = MIN_CARD_RANK; i <= MAX_CARD_RANK; i++) {
                 standardDeck.add(getNumericCard(suit, i));
             }
             for (int i = 0; i < face.length(); i++) {

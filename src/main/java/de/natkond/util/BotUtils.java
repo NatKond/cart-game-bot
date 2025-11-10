@@ -38,8 +38,11 @@ public final class BotUtils {
 
     public static final String GAME_RULES =
             """
-                    The deck has 4 suits, each with 9 cards valued from 1 to 9.
-                    The goal is to get as close to 21 as possible without going over.
+                    The deck has 36 cards:
+                    4 suits: ♠ ♦ ♥ ♣, each has
+                    9 cards: 6, 7, 8, 9, 10, J, Q, K, A.
+                    Card values: numbers = value,
+                    J = 2, Q = 3, K = 4, A = 1 or 11.
                     You draw cards (Y) or stop (N).
                     The dealer then plays — whoever is closer to 21 wins!""";
 
