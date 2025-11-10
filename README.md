@@ -10,7 +10,7 @@ The goal is to beat the dealer by getting closer to 21 without going over.
 - **Telegram API**
 - **Maven**
 
-## 🚀 How to Start
+## How to Start
 To run locally use the command from the directory with the docker-compose.yml file.
 ```shell
 docker-compose up --build
