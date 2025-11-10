@@ -1,4 +1,4 @@
-package de.natkond;
+package de.natkond.util;
 
 import java.util.*;
 

@@ -1,6 +1,5 @@
-package de.natkond.cardGame;
+package de.natkond.util;
 
-import de.natkond.Card;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 import static de.natkond.util.BotUtils.*;
 import static de.natkond.util.GameConstants.*;
 
-public class GameSessionOld {
+public class GameSession {
 
     private int playerScore;
     private int dealerScore;
@@ -199,4 +198,3 @@ public class GameSessionOld {
         hand.add(currentCard);
     }
 }
-

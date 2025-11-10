@@ -1,4 +1,4 @@
-package de.natkond.cardGame;
+package de.natkond.cardGameConsole;
 
 import java.util.*;
 
